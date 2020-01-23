@@ -18,20 +18,16 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://howlger:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
-        echo GITHUB_ACTOR is ${GITHUB_ACTOR}
+        REMOTE="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
         git clone ${REMOTE} --branch master --depth 1
         cd *
-        ls -la
         rm -rf update
         cp -avr "${SOURCE_DIR}" update
         ls -la
         ls -la update
-        git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        git config --local user.name  "${GITHUB_ACTOR}"
         git add update
         git commit -m "Update Eclipse update site" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         echo Pushing...
