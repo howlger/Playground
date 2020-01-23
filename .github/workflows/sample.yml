@@ -15,10 +15,12 @@ jobs:
     - run: ls -la .
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       env:
-        GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        UPDATE_SITE_REPO: howlger/Playground-Update-Site
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
+        REMOTE="https://${GITHUB_ACTOR}:${TOKEN}@github.com/howlger/${UPDATE_SITE_REPO}.git"
+        echo ${REMOTE}
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
