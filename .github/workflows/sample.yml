@@ -28,7 +28,9 @@ jobs:
         cp -avr "${SOURCE_DIR}" update
         ls -la
         ls -la update
+        git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --local user.name  "${GITHUB_ACTOR}"
         git add update
-        git commit -m "Update Eclipse update site" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+        git commit -m "Update Eclipse update site"
         echo Pushing...
         git push origin master
