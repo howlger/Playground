@@ -14,11 +14,11 @@ jobs:
     - run: ls -l out
     - run: ls -la .
     - run: |
-        SOURCE_DIR=$(pwd)
+        SOURCE_DIR="$(pwd)/out"
         echo ${SOURCE_DIR}
-        echo $(pwd)/path/to/dir
-        SOURCE_DIR2="$(pwd)/path/to/dir"
-        echo ${SOURCE_DIR2}
+        mkdir "${HOME}/target_repo"
+        cd "${HOME}"
+        ls -la
     - run: |
         FOO="Hello World"
         echo ${FOO}
