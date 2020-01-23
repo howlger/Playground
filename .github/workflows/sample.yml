@@ -12,7 +12,6 @@ jobs:
     - run: mkdir out123 && echo test > out123/test.txt
     - run: ls -l out123
     - run: pwd
-    - run: cd /github/home && mkdir target_repo
     - uses: seanmiddleditch/gha-publish-to-git@master
       with:
         repository: howlger/Playground-Update-Site
@@ -21,6 +20,5 @@ jobs:
         github_pat: '${{ secrets.PUBLISH_UPDATE_SITE }}'
         source_folder: out123
         commit_message: Publish update site
-        working_directory: /github/home/target_repo
     - run: ls -l target_repo
     - run: ls -l target_repo/out123
