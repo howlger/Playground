@@ -13,15 +13,16 @@ jobs:
     - run: mkdir out && echo test > out/test.txt
     - run: ls -l out
     - run: ls -la .
-    - run: pwd
     - run: |
-        mkdir out2
-        echo test2 > out2/test2.txt
-        cd out2
-        ls -la
+        SOURCE_DIR=$(pwd)
+        echo ${SOURCE_DIR}
+        echo $(pwd)/path/to/dir
+        SOURCE_DIR2="$(pwd)/path/to/dir"
+        echo ${SOURCE_DIR2}
     - run: |
         FOO="Hello World"
         echo ${FOO}
         echo ${HOME}
+        pwd
         cd "${HOME}"
         pwd
