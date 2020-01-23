@@ -18,7 +18,7 @@ jobs:
         UPDATE_SITE_REPO: howlger/Playground-Update-Site
       run: |
         SOURCE_DIR="$(pwd)/${UPDATE_SITE_PATH}"
-        REMOTE="https://${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
+        REMOTE="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
