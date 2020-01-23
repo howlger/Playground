@@ -11,6 +11,8 @@ jobs:
     - uses: actions/checkout@master
     - run: mkdir out123 && echo test > out123/test.txt
     - run: ls -l out123
+    - run: mkdir /github/home/target_repo
+    - run: pwd
     - uses: seanmiddleditch/gha-publish-to-git@master
       with:
         repository: howlger/Playground-Update-Site
