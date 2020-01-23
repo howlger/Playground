@@ -37,6 +37,8 @@ jobs:
         #git push "${REMOTE}" HEAD:master
     - name: Push changes
       uses: ad-m/github-push-action@master
+      env:
+        INPUT_GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       with:
         github_token: ${{ secrets.PUBLISH_UPDATE_SITE }}
         directory: /home/runner/target_repo/Playground-Update-Site
