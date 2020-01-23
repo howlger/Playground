@@ -18,7 +18,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
+        REMOTE="https://howlger:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
+        echo GITHUB_ACTOR is ${GITHUB_ACTOR}
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
