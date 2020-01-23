@@ -20,6 +20,6 @@ jobs:
         source_folder: out123
         commit_message: Publish update site
         working_directory: target_repo
-        target_folder: target_repo/out123
+        target_folder: out1234
     - run: ls -l target_repo
-    - run: ls -l target_repo/out123
+    - run: ls -l target_repo/out1234
