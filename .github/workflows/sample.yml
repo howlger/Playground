@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - run: mkdir out && echo test > out/test.txt
+    - run: ls -l out
     - uses: seanmiddleditch/gha-publish-to-git@master
       with:
         repository: howlger/Playground-Update-Site
