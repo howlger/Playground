@@ -15,10 +15,10 @@ jobs:
     - run: ls -la .
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       env:
-        FOO: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://${GITHUB_ACTOR}:${FOO}@github.com/howlger/Playground-Update-Site.git"
+        REMOTE="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
@@ -26,11 +26,18 @@ jobs:
         cd *
         rm -rf update
         cp -avr "${SOURCE_DIR}" update
+        pwd
         ls -la
         ls -la update
         git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --local user.name  "${GITHUB_ACTOR}"
         git add update
         git commit -m "Update Eclipse update site"
-        echo Pushing...
-        git push "${REMOTE}" HEAD:master
+        #echo Pushing...
+        #git push "${REMOTE}" HEAD:master
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        directory: /home/runner/target_repo/Playground-Update-Site
+        repository: howlger/Playground-Update-Site
