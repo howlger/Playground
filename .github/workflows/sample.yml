@@ -9,12 +9,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - run: mkdir out && echo test > out/test.txt
-    - run: ls -l out
+    - run: mkdir out123 && echo test > out123/test.txt
+    - run: ls -l out123
     - uses: seanmiddleditch/gha-publish-to-git@master
       with:
         repository: howlger/Playground-Update-Site
         branch: master
         github_token: '${{ secrets.GITHUB_TOKEN }}'
         github_pat: '${{ secrets.PUBLISH_UPDATE_SITE }}'
-        source_folder: out
+        source_folder: out123
+        commit_message: Publish update site
