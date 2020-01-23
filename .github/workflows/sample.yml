@@ -15,14 +15,8 @@ jobs:
     - run: ls -la .
     - run: |
         SOURCE_DIR="$(pwd)/out"
-        echo ${SOURCE_DIR}
         mkdir "${HOME}/target_repo"
-        cd "${HOME}"
+        cd "${HOME}/target_repo"
         ls -la
-    - run: |
-        FOO="Hello World"
-        echo ${FOO}
-        echo ${HOME}
-        pwd
-        cd "${HOME}"
-        pwd
+        git clone https://github.com/howlger/Playground-Update-Site.git --branch master --depth
+        ls -la
