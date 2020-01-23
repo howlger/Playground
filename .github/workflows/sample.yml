@@ -22,7 +22,7 @@ jobs:
         cd *
         ls -la
         rm -rf update
-        cp "${SOURCE_DIR}" update
+        cp -avr "${SOURCE_DIR}" update
         ls -la
         ls -la update
         
