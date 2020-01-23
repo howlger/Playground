@@ -40,6 +40,6 @@ jobs:
       env:
         INPUT_GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       with:
-        github_token: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         directory: /home/runner/target_repo/Playground-Update-Site
         repository: howlger/Playground-Update-Site
