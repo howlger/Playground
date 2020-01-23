@@ -19,7 +19,7 @@ jobs:
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
-        git clone https://${secrets.PUBLISH_UPDATE_SITE}@github.com/howlger/Playground-Update-Site.git --branch master --depth 1
+        git clone https://howlger:PUBLISH_UPDATE_SITE@github.com/howlger/Playground-Update-Site.git --branch master --depth 1
         cd *
         ls -la
         rm -rf update
