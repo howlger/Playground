@@ -16,8 +16,7 @@ jobs:
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://${secrets.PUBLISH_UPDATE_SITE}@github.com/howlger/Playground-Update-Site.git"
-        echo ${REMOTE}
+        REMOTE="https://${{ secrets.PUBLISH_UPDATE_SITE }}@github.com/howlger/Playground-Update-Site.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
