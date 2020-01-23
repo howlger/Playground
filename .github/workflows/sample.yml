@@ -17,4 +17,3 @@ jobs:
         github_token: '${{ secrets.GITHUB_TOKEN }}'
         github_pat: '${{ secrets.PUBLISH_UPDATE_SITE }}'
         source_folder: out
-      if: success() && github.event == 'push'
