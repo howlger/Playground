@@ -19,7 +19,7 @@ jobs:
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
-        git clone https://github.com/howlger/Playground-Update-Site.git --branch master --depth 1
+        git clone https://PUBLISH_UPDATE_SITE@github.com/howlger/Playground-Update-Site.git --branch master --depth 1
         cd *
         ls -la
         rm -rf update
@@ -30,4 +30,5 @@ jobs:
         git config --local user.name  "${GITHUB_ACTOR}"
         git add update
         git commit -m "Update Eclipse update site" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+        git push
         
