@@ -19,4 +19,10 @@ jobs:
         cd "${HOME}/target_repo"
         ls -la
         git clone https://github.com/howlger/Playground-Update-Site.git --branch master --depth 1
+        cd *
         ls -la
+        rm -rf update
+        cp "${SOURCE_DIR}" update
+        ls -la
+        ls -la update
+        
