@@ -9,10 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - run: ls -l .
-    - run: mkdir out && echo test > out/test.txt
-    - run: ls -l out
-    - run: ls -la .
+    - name: Create stuff...
+      run: mkdir out && echo test > out/test.txt
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       env:
         TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
@@ -21,7 +19,6 @@ jobs:
       run: |
         SOURCE_DIR="$(pwd)/${UPDATE_SITE_PATH}"
         REMOTE="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
-        echo ${REMOTE}
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
@@ -39,7 +36,7 @@ jobs:
         #echo Pushing...
         #git push "${REMOTE}" HEAD:master
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@v0.5.0
       env:
         INPUT_GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       with:
