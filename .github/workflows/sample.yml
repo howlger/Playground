@@ -1,0 +1,20 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - run: mkdir out && echo test > out/test.txt
+    - uses: seanmiddleditch/gha-publish-to-git@master
+      with:
+        repository: https://github.com/howlger/Playground-Update-Site.git
+        branch: master
+        github_token: '${{ secrets.GITHUB_TOKEN }}'
+        github_pat: '${{ secrets.PUBLISH_UPDATE_SITE }}'
+        source_folder: out
+      if: success() && github.event == 'push'
