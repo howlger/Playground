@@ -12,6 +12,7 @@ jobs:
     - run: ls -l .
     - run: mkdir out123 && echo test > out123/test.txt
     - run: ls -l out123
+    - run: ls -la .
     - run: pwd
     - uses: seanmiddleditch/gha-publish-to-git@master
       with:
