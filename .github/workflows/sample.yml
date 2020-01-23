@@ -33,4 +33,4 @@ jobs:
         git add update
         git commit -m "Update Eclipse update site"
         echo Pushing...
-        git push "${REMOTE}" origin master
+        git push "${REMOTE}" HEAD:master
