@@ -14,9 +14,11 @@ jobs:
     - run: ls -l out
     - run: ls -la .
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
+      env:
+        GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
       run: |
         SOURCE_DIR="$(pwd)/out"
-        REMOTE="https://${{ secrets.PUBLISH_UPDATE_SITE }}@github.com/howlger/Playground-Update-Site.git"
+        REMOTE="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/howlger/Playground-Update-Site.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
@@ -33,4 +35,3 @@ jobs:
         git commit -m "Update Eclipse update site" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         echo Pushing...
         git push origin master
-        
