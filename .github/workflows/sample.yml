@@ -18,11 +18,10 @@ jobs:
         UPDATE_SITE_REPO: howlger/Playground-Update-Site
       run: |
         SOURCE_DIR="$(pwd)/${UPDATE_SITE_PATH}"
-        REMOTE="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
-        git clone ${REMOTE} --branch master --depth 1
+        git clone "https://github.com/${UPDATE_SITE_REPO}.git" --branch master --depth 1
         cd *
         rm -rf update
         cp -avr "${SOURCE_DIR}" update
@@ -34,7 +33,7 @@ jobs:
         git add update
         git commit -m "Update Eclipse update site"
         echo Pushing...
-        git push "${REMOTE}" HEAD:master
+        git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git" HEAD:master
 #    - name: Push changes
 #      uses: ad-m/github-push-action@v0.5.0
 #      env:
