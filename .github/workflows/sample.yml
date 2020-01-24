@@ -13,8 +13,15 @@ jobs:
       run: mkdir out && echo test > out/test.txt
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       env:
-        #TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+        # When using
+        # TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # instead, cloning works but pushing fails with the following error
+        # since the GITHUB_TOKEN works only for the same repository:
+        # remote: Permission to howlger/Playground-Update-Site.git denied to github-actions[bot].
+        # fatal: unable to access 'https://github.com/howlger/Playground-Update-Site.git/': The requested URL returned error: 403
+        TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
+        
         UPDATE_SITE_PATH: out
         UPDATE_SITE_REPO: howlger/Playground-Update-Site
       run: |
