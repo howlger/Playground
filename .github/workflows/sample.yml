@@ -42,7 +42,7 @@ jobs:
         git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --local user.name  "${GITHUB_ACTOR}"
         git add update
-        git commit -m "Update update site"
+        git commit --amend -m "Update update site"
         echo Pushing to the update site repository...
-        git push "${REMOTE}" HEAD:master
-        echo Done, see https://github.com/${UPDATE_SITE_REPO}/update
+        git push --force "${REMOTE}" HEAD:master
+        echo Done, see https://github.com/${UPDATE_SITE_REPO}/blob/master/update
