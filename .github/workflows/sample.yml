@@ -10,10 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Create stuff...
-      run: mkdir out && echo test v2 > out/test.txt
-    - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
+      run: mkdir out && echo test v3 > out/test.txt
+    - name: Publish update site
       env:
-      
         # Requires the following:
         # 1. Create a new personal access token with the scope "repo > public_repo":
         #    1. In <https://github.com/settings/tokens> click "Generate new token"
@@ -27,26 +26,23 @@ jobs:
         #    3. Paste the token value (40-digit hexadecimal number)
         #    4. Enter the name "PUBLISH_UPDATE_SITE"
         TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
-        
         UPDATE_SITE_PATH: out
         UPDATE_SITE_REPO: howlger/Playground-Update-Site
- 
       run: |
         SOURCE_DIR="$(pwd)/${UPDATE_SITE_PATH}"
-        TARGET_REPO="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
+        REMOTE="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
+        echo Cloning update site repository...
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
-        ls -la
-        git clone "${TARGET_REPO}" --branch master --depth 1
-        cd *
+        git clone "${REMOTE}" . --branch master --depth 1
+        echo Copying the update site into the update site repository...
         rm -rf update
         cp -avr "${SOURCE_DIR}" update
-        pwd
-        ls -la
-        ls -la update
+        echo Creating commit...
         git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --local user.name  "${GITHUB_ACTOR}"
         git add update
-        git commit -m "Update Eclipse update site"
-        echo Pushing...
-        git push "${TARGET_REPO}" HEAD:master
+        git commit -m "Update update site"
+        echo Pushing to the update site repository...
+        git push "${REMOTE}" HEAD:master
+        echo Done, see https://github.com/${UPDATE_SITE_REPO}/update
