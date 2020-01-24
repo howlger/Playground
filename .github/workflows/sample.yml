@@ -49,4 +49,3 @@ jobs:
         echo Pushing to the update site repository...
         git push --force "${REMOTE}" HEAD:master
         echo Done. See https://github.com/${UPDATE_SITE_REPO}/blob/master/update
-      # TODO 
