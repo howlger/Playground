@@ -1,11 +1,12 @@
-name: Build and publish update site
+name: Build plug-in and publish update site
 
 on: [push]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    # Tycho requires Maven 3.6.3 or higher; see https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@master
@@ -48,3 +49,4 @@ jobs:
         echo Pushing to the update site repository...
         git push --force "${REMOTE}" HEAD:master
         echo Done. See https://github.com/${UPDATE_SITE_REPO}/blob/master/update
+      # TODO 
