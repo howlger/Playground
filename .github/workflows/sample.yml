@@ -10,26 +10,34 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Create stuff...
-      run: mkdir out && echo test > out/test.txt
+      run: mkdir out && echo test v2 > out/test.txt
     - name: Publish update site to https://raw.githubusercontent.com/howlger/Playground-Update-Site/update
       env:
       
-        # When using
-        # TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # instead, cloning works but pushing fails with the following error
-        # since the GITHUB_TOKEN works only for the same repository:
-        # remote: Permission to howlger/Playground-Update-Site.git denied to github-actions[bot].
-        # fatal: unable to access 'https://github.com/howlger/Playground-Update-Site.git/': The requested URL returned error: 403
+        # Requires the following:
+        # 1. Create a new personal access token with the scope "repo > public_repo":
+        #    1. In <https://github.com/settings/tokens> click "Generate new token"
+        #    2. Enter a name of your choice (e.g. "Update Site <Repository>")
+        #    3. Select the scope "repo > public_repo"
+        #    4. Click "Generate token"
+        #    5. Copy the token value (40-digit hexadecimal number)
+        # 2. In the repository containig this workflow add the created token as a secrect
+        #    1. In the repository in the "Settings" tab go to "Secrets"
+        #    2. Click the link "Add a new secret"
+        #    3. Paste the token value (40-digit hexadecimal number)
+        #    4. Enter the name "PUBLISH_UPDATE_SITE"
         TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
         
         UPDATE_SITE_PATH: out
         UPDATE_SITE_REPO: howlger/Playground-Update-Site
+ 
       run: |
         SOURCE_DIR="$(pwd)/${UPDATE_SITE_PATH}"
+        TARGET_REPO="https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git"
         mkdir "${HOME}/target_repo"
         cd "${HOME}/target_repo"
         ls -la
-        git clone "https://github.com/${UPDATE_SITE_REPO}.git" --branch master --depth 1
+        git clone "${TARGET_REPO}" --branch master --depth 1
         cd *
         rm -rf update
         cp -avr "${SOURCE_DIR}" update
@@ -41,12 +49,4 @@ jobs:
         git add update
         git commit -m "Update Eclipse update site"
         echo Pushing...
-        git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${UPDATE_SITE_REPO}.git" HEAD:master
-#    - name: Push changes
-#      uses: ad-m/github-push-action@v0.5.0
-#      env:
-#        INPUT_GITHUB_TOKEN: ${{ secrets.PUBLISH_UPDATE_SITE }}
-#      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
-#        directory: /home/runner/target_repo/Playground-Update-Site
-#        repository: howlger/Playground-Update-Site
+        git push "${TARGET_REPO}" HEAD:master
