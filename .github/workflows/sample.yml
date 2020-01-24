@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Create stuff...
-      run: mkdir out && echo test v5 > out/test.txt
+      run: mkdir out && echo test v6 > out/test.txt
     - name: Publish update site
       env:
         # Requires the following preparation:
@@ -40,7 +40,7 @@ jobs:
         git clone "${REMOTE}" . --branch master --depth 1
         echo Copying the update site into the update site repository...
         rm -rf update
-        cp -avr "${SOURCE_DIR}" update
+        cp -av "${SOURCE_DIR}" update
         echo Creating commit...
         git config --local user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --local user.name  "${GITHUB_ACTOR}"
